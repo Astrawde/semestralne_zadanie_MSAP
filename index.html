@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <meta charset="UTF-8">
+    <title>Wave2Function Studio</title>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+
+<div class="app">
+
+    <header class="hero">
+        <div>
+            <h1>Wave2Function Studio</h1>
+            <p>
+                Webová aplikácia, ktorá analyzuje zvukový signál a prevedie ho na matematickú funkciu, graf a porovnanie s pôvodným signálom.
+            </p>
+        </div>
+    </header>
+
+    <main class="dashboard">
+
+        <div class="left-panel">
+
+            <section class="card">
+                <h2>1. Vstupný audio súbor</h2>
+
+                <p class="section-description">
+                    Nahraj MP3 alebo WAV súbor a spusti analýzu.
+                </p>
+
+                <input type="file" id="audioFile" accept="audio/*">
+
+                <audio id="audioPlayer" controls></audio>
+
+                <button id="analyzeBtn">Analyzovať zvuk</button>
+            </section>
+
+            <section class="card">
+                <h2>2. Výsledky analýzy</h2>
+
+                <div class="stats-grid">
+                    <div class="stat-box">
+                        <span class="stat-label">Maximálna amplitúda</span>
+                        <strong id="maxAmplitude">-</strong>
+                    </div>
+
+                    <div class="stat-box">
+                        <span class="stat-label">Priemerná amplitúda</span>
+                        <strong id="avgAmplitude">-</strong>
+                    </div>
+
+                    <div class="stat-box">
+                        <span class="stat-label">Dominantná frekvencia</span>
+                        <strong><span id="frequency">-</span> Hz</strong>
+                    </div>
+                </div>
+            </section>
+
+            <section class="card">
+                <h2>3. Interaktívne nastavenia</h2>
+
+                <div class="controls">
+                    <label>
+                        Typ funkcie
+                        <select id="functionType">
+                            <option value="sin">Sínus</option>
+                            <option value="cos">Kosínus</option>
+                            <option value="combined">Kombinovaná funkcia</option>
+                        </select>
+                    </label>
+
+                    <label>
+                        Amplitúda
+                        <input type="range" id="amplitudeSlider" min="0" max="1" step="0.01" value="0.5">
+                        <span id="amplitudeValue">0.50</span>
+                    </label>
+
+                    <label>
+                        Frekvencia
+                        <input type="range" id="frequencySlider" min="1" max="1000" step="1" value="100">
+                        <span id="frequencyValue">100 Hz</span>
+                    </label>
+                </div>
+
+                <div class="button-row">
+                    <button id="animateBtn">Spustiť animáciu</button>
+                    <button id="resetBtn">Reset podľa audia</button>
+                    <button id="exportBtn">Exportovať PNG</button>
+                </div>
+            </section>
+
+        </div>
+
+        <div class="right-panel">
+
+            <section class="card formula-card">
+                <h2>4. Vygenerovaná matematická funkcia</h2>
+
+                <div class="formula-box">
+                    <p id="formula">f(t) = A · sin(2π · f · t)</p>
+                </div>
+            </section>
+
+            <section class="card graph-card">
+                <h2>5. Graf aproximovanej funkcie</h2>
+
+                <p class="section-description">
+                    Graf obsahuje os X, os Y, číselné body a krivku vytvorenú podľa matematického modelu.
+                </p>
+
+                <canvas id="functionCanvas" width="900" height="260"></canvas>
+            </section>
+
+            <section class="card comparison-card">
+                <h2>6. Porovnanie signálu a modelu</h2>
+
+                <p class="section-description">
+                    Porovnanie pôvodného audio signálu s vygenerovanou matematickou funkciou.
+                </p>
+
+                <canvas id="waveCanvas" width="900" height="220"></canvas>
+            </section>
+
+        </div>
+
+    </main>
+
+    <footer>
+        <p>
+            Projekt kombinuje zvuk, matematickú analýzu, grafické vykresľovanie a používateľskú interaktivitu.
+        </p>
+    </footer>
+
+</div>
+
+<script src="./js/script.js"></script>
+</body>
+</html>
