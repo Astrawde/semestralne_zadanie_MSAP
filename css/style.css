@@ -25,6 +25,11 @@ body {
     padding: 8px 16px;
     margin-bottom: 8px;
     box-shadow: 0 10px 24px rgba(0, 0, 0, 0.28);
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
 }
 
 .hero h1 {
@@ -36,8 +41,25 @@ body {
     margin: 0;
     color: #d1d5db;
     font-size: 12px;
-    max-width: 1000px;
+    max-width: 1050px;
     line-height: 1.25;
+}
+
+.back-btn {
+    display: inline-block;
+    background: #0ea5e9;
+    color: white;
+    text-decoration: none;
+    white-space: nowrap;
+    padding: 8px 14px;
+    font-size: 12px;
+    border-radius: 9px;
+    transition: 0.2s;
+}
+
+.back-btn:hover {
+    background: #0284c7;
+    transform: translateY(-1px);
 }
 
 .dashboard {
@@ -252,6 +274,11 @@ footer {
 @media (max-width: 1050px) {
     .dashboard {
         grid-template-columns: 1fr;
+    }
+
+    .hero {
+        flex-direction: column;
+        align-items: flex-start;
     }
 
     .hero h1 {

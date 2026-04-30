@@ -13,9 +13,12 @@
         <div>
             <h1>Wave2Function Studio</h1>
             <p>
-                Webová aplikácia, ktorá analyzuje zvukový signál a prevedie ho na matematickú funkciu, graf a porovnanie s pôvodným signálom.
+                Statická multimediálna webová služba, ktorá analyzuje audio súbor priamo v prehliadači
+                a prevedie zvukový signál na matematickú funkciu, graf a porovnanie režimov.
             </p>
         </div>
+
+        <a href="/" class="back-btn">Späť</a>
     </header>
 
     <main class="dashboard">
@@ -26,7 +29,7 @@
                 <h2>1. Vstupný audio súbor</h2>
 
                 <p class="section-description">
-                    Nahraj MP3 alebo WAV súbor a spusti analýzu.
+                    <strong>INPUT:</strong> Nahraj MP3 alebo WAV súbor. Aplikácia spracuje audio lokálne v prehliadači pomocou Web Audio API.
                 </p>
 
                 <input type="file" id="audioFile" accept="audio/*">
@@ -38,6 +41,10 @@
 
             <section class="card">
                 <h2>2. Výsledky analýzy</h2>
+
+                <p class="section-description">
+                    Aplikácia vypočíta základné vlastnosti signálu: amplitúdu a približnú dominantnú frekvenciu.
+                </p>
 
                 <div class="stats-grid">
                     <div class="stat-box">
@@ -59,6 +66,10 @@
 
             <section class="card">
                 <h2>3. Interaktívne nastavenia</h2>
+
+                <p class="section-description">
+                    Uprav typ funkcie, amplitúdu alebo frekvenciu a sleduj zmenu výstupu v reálnom čase.
+                </p>
 
                 <div class="controls">
                     <label>
@@ -97,6 +108,10 @@
             <section class="card formula-card">
                 <h2>4. Vygenerovaná matematická funkcia</h2>
 
+                <p class="section-description">
+                    <strong>OUTPUT:</strong> Výstupom je matematický model vytvorený zo zvukového signálu.
+                </p>
+
                 <div class="formula-box">
                     <p id="formula">f(t) = A · sin(2π · f · t)</p>
                 </div>
@@ -113,10 +128,10 @@
             </section>
 
             <section class="card comparison-card">
-                <h2>6. Porovnanie signálu a modelu</h2>
+                <h2>6. Porovnanie všetkých 3 módov</h2>
 
                 <p class="section-description">
-                    Porovnanie pôvodného audio signálu s vygenerovanou matematickou funkciou.
+                    Porovnanie všetkých troch režimov: sínus, kosínus a kombinovaná funkcia.
                 </p>
 
                 <canvas id="waveCanvas" width="900" height="220"></canvas>
@@ -128,7 +143,7 @@
 
     <footer>
         <p>
-            Projekt kombinuje zvuk, matematickú analýzu, grafické vykresľovanie a používateľskú interaktivitu.
+            Projekt funguje bez externého backendu. Všetky výpočty, spracovanie audia a grafické výstupy prebiehajú priamo v prehliadači.
         </p>
     </footer>
 

@@ -24,7 +24,6 @@ const resetBtn = document.getElementById("resetBtn");
 const exportBtn = document.getElementById("exportBtn");
 
 let selectedAudioFile = null;
-let lastAudioData = null;
 
 let currentAmplitude = 0.5;
 let currentFrequency = 100;
@@ -36,7 +35,6 @@ let isAnimating = false;
 let animationFrameId = null;
 let animationPhase = 0;
 
-// Výber audio súboru
 audioFileInput.addEventListener("change", function () {
     selectedAudioFile = this.files[0];
 
@@ -49,7 +47,6 @@ audioFileInput.addEventListener("change", function () {
     audioPlayer.src = audioURL;
 });
 
-// Analýza zvuku
 analyzeBtn.addEventListener("click", async function () {
     if (!selectedAudioFile) {
         alert("Najprv nahraj audio súbor.");
@@ -73,8 +70,6 @@ analyzeBtn.addEventListener("click", async function () {
 
         const channelData = audioBuffer.getChannelData(0);
         const sampleRate = audioBuffer.sampleRate;
-
-        lastAudioData = channelData;
 
         const maxAmplitude = calculateMaxAmplitude(channelData);
         const avgAmplitude = calculateAverageAmplitude(channelData);
@@ -110,7 +105,6 @@ analyzeBtn.addEventListener("click", async function () {
     }
 });
 
-// Výpočet maximálnej amplitúdy
 function calculateMaxAmplitude(data) {
     let max = 0;
 
@@ -125,7 +119,6 @@ function calculateMaxAmplitude(data) {
     return max;
 }
 
-// Výpočet priemernej amplitúdy
 function calculateAverageAmplitude(data) {
     let sum = 0;
 
@@ -136,7 +129,6 @@ function calculateAverageAmplitude(data) {
     return sum / data.length;
 }
 
-// Jednoduchý odhad dominantnej frekvencie pomocou prechodov cez nulu
 function estimateDominantFrequency(data, sampleRate) {
     let zeroCrossings = 0;
 
@@ -150,7 +142,6 @@ function estimateDominantFrequency(data, sampleRate) {
     return zeroCrossings / (2 * duration);
 }
 
-// Hodnota funkcie podľa zvoleného typu
 function getFunctionValue(type, amplitude, visualFrequency, t, phase) {
     if (type === "sin") {
         return amplitude * Math.sin(2 * Math.PI * visualFrequency * t + phase);
@@ -160,14 +151,12 @@ function getFunctionValue(type, amplitude, visualFrequency, t, phase) {
         return amplitude * Math.cos(2 * Math.PI * visualFrequency * t + phase);
     }
 
-    // Kombinovaná funkcia = Sin + Cos
     return (
         amplitude * Math.sin(2 * Math.PI * visualFrequency * t + phase) +
         (amplitude / 2) * Math.cos(2 * Math.PI * visualFrequency * 2 * t + phase)
     );
 }
 
-// Hlavný graf matematickej funkcie
 function drawMathFunction(amplitude, frequency, phase = 0) {
     functionCtx.clearRect(0, 0, functionCanvas.width, functionCanvas.height);
 
@@ -210,7 +199,6 @@ function drawMathFunction(amplitude, frequency, phase = 0) {
     updateFormulaText(amplitude, frequency);
 }
 
-// Mriežka hlavného grafu
 function drawGraphGrid(ctx, canvas, title) {
     const originX = 55;
     const originY = canvas.height / 2;
@@ -284,7 +272,6 @@ function drawGraphGrid(ctx, canvas, title) {
     ctx.restore();
 }
 
-// Body na hlavnom grafe
 function drawFunctionPoints(amplitude, frequency, phase = 0) {
     const originX = 55;
     const originY = functionCanvas.height / 2;
@@ -318,7 +305,6 @@ function drawFunctionPoints(amplitude, frequency, phase = 0) {
     }
 }
 
-// Bod 6: Porovnanie všetkých 3 módov
 function drawComparisonGraph() {
     waveCtx.clearRect(0, 0, waveCanvas.width, waveCanvas.height);
 
@@ -333,7 +319,6 @@ function drawComparisonGraph() {
     waveCtx.fillStyle = "#111827";
     waveCtx.fillRect(0, 0, width, height);
 
-    // Mriežka
     waveCtx.strokeStyle = "#243244";
     waveCtx.lineWidth = 1;
 
@@ -351,7 +336,6 @@ function drawComparisonGraph() {
         waveCtx.stroke();
     }
 
-    // Osi
     waveCtx.strokeStyle = "#e5e7eb";
     waveCtx.lineWidth = 2;
 
@@ -365,7 +349,6 @@ function drawComparisonGraph() {
     waveCtx.lineTo(originX, height - 28);
     waveCtx.stroke();
 
-    // Popisy osi
     waveCtx.fillStyle = "#e5e7eb";
     waveCtx.font = "12px Arial";
     waveCtx.textAlign = "center";
@@ -380,11 +363,9 @@ function drawComparisonGraph() {
     waveCtx.fillText("0", originX - 8, originY + 4);
     waveCtx.fillText("-1", originX - 8, originY + 61);
 
-    // Nadpis
     waveCtx.textAlign = "left";
     waveCtx.fillText("Sin vs Cos vs Combined", originX, 14);
 
-    // Legenda
     waveCtx.fillStyle = "#38bdf8";
     waveCtx.fillRect(width - 310, 12, 12, 12);
     waveCtx.fillStyle = "#e5e7eb";
@@ -406,7 +387,6 @@ function drawComparisonGraph() {
     drawComparisonLine("cos", "#f97316", 2, visualFrequency, scaleY);
     drawComparisonLine("combined", "#22c55e", 2.4, visualFrequency, scaleY);
 
-    // Popisy osí
     waveCtx.fillStyle = "#cbd5e1";
     waveCtx.font = "12px Arial";
     waveCtx.textAlign = "center";
@@ -419,7 +399,6 @@ function drawComparisonGraph() {
     waveCtx.restore();
 }
 
-// Pomocná funkcia na kreslenie čiary v bode 6
 function drawComparisonLine(type, color, lineWidth, visualFrequency, scaleY) {
     const width = waveCanvas.width;
     const height = waveCanvas.height;
@@ -449,7 +428,6 @@ function drawComparisonLine(type, color, lineWidth, visualFrequency, scaleY) {
     waveCtx.stroke();
 }
 
-// Aktualizácia textu vzorca
 function updateFormulaText(amplitude, frequency) {
     const type = functionTypeSelect.value;
 
@@ -465,7 +443,6 @@ function updateFormulaText(amplitude, frequency) {
     }
 }
 
-// Prekreslenie pri zmene sliderov alebo typu funkcie
 function redrawInteractiveFunction() {
     currentAmplitude = parseFloat(amplitudeSlider.value);
     currentFrequency = parseFloat(frequencySlider.value);
@@ -477,7 +454,6 @@ function redrawInteractiveFunction() {
     drawComparisonGraph();
 }
 
-// Animácia
 function animateFunction() {
     if (!isAnimating) {
         return;
@@ -491,7 +467,6 @@ function animateFunction() {
     animationFrameId = requestAnimationFrame(animateFunction);
 }
 
-// Event listenery
 amplitudeSlider.addEventListener("input", function () {
     redrawInteractiveFunction();
 });
@@ -539,6 +514,5 @@ exportBtn.addEventListener("click", function () {
     link.click();
 });
 
-// Prvé vykreslenie pri načítaní stránky
 drawMathFunction(currentAmplitude, currentFrequency, 0);
 drawComparisonGraph();
