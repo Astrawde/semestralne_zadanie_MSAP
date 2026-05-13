@@ -14,7 +14,7 @@
             <h1>Wave2Function Studio</h1>
             <p>
                 Statická multimediálna webová služba, ktorá analyzuje audio súbor priamo v prehliadači
-                a prevedie zvukový signál na matematickú funkciu, graf a porovnanie režimov.
+                a prevedie zvukový signál na matematickú funkciu, graf, transformácie a porovnanie režimov.
             </p>
         </div>
 
@@ -40,32 +40,60 @@
             </section>
 
             <section class="card">
-                <h2>2. Výsledky analýzy</h2>
+                <h2>2. Preset audio generátor</h2>
 
                 <p class="section-description">
-                    Aplikácia vypočíta základné vlastnosti signálu: amplitúdu a približnú dominantnú frekvenciu.
+                    Vygeneruj testovací tón bez potreby nahrávať vlastný súbor. Tieto tóny sú vhodné na ukážku matematickej aproximácie.
                 </p>
 
-                <div class="stats-grid">
-                    <div class="stat-box">
-                        <span class="stat-label">Maximálna amplitúda</span>
-                        <strong id="maxAmplitude">-</strong>
-                    </div>
+                <div class="preset-grid">
+                    <button class="preset-btn" data-type="sine" data-frequency="220">Sine 220 Hz</button>
+                    <button class="preset-btn" data-type="sine" data-frequency="440">Sine 440 Hz</button>
+                    <button class="preset-btn" data-type="sine" data-frequency="880">Sine 880 Hz</button>
+                    <button class="preset-btn" data-type="combined" data-frequency="440">Combined 440 Hz</button>
+                </div>
+            </section>
 
-                    <div class="stat-box">
-                        <span class="stat-label">Priemerná amplitúda</span>
-                        <strong id="avgAmplitude">-</strong>
-                    </div>
+            <section class="card collapsible-card">
+                <div class="card-title-row">
+                    <h2>3. Výsledky analýzy</h2>
+                    <button class="collapse-btn" data-target="resultsContent">Skryť</button>
+                </div>
 
-                    <div class="stat-box">
-                        <span class="stat-label">Dominantná frekvencia</span>
-                        <strong><span id="frequency">-</span> Hz</strong>
+                <div id="resultsContent" class="collapsible-content">
+                    <p class="section-description">
+                        Aplikácia vypočíta základné vlastnosti signálu: amplitúdu, približnú dominantnú frekvenciu a podobnosť s matematickým modelom.
+                    </p>
+
+                    <div class="stats-grid">
+                        <div class="stat-box">
+                            <span class="stat-label">Maximálna amplitúda</span>
+                            <strong id="maxAmplitude">-</strong>
+                        </div>
+
+                        <div class="stat-box">
+                            <span class="stat-label">Priemerná amplitúda</span>
+                            <strong id="avgAmplitude">-</strong>
+                        </div>
+
+                        <div class="stat-box">
+                            <span class="stat-label">Dominantná frekvencia</span>
+                            <strong><span id="frequency">-</span> Hz</strong>
+                        </div>
+
+                        <div class="stat-box">
+                            <span class="stat-label">Podobnosť s modelom</span>
+                            <strong><span id="similarityScore">-</span>%</strong>
+                            <div class="similarity-bar">
+                                <div id="similarityFill"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
 
             <section class="card">
-                <h2>3. Interaktívne nastavenia</h2>
+                <h2>4. Interaktívne nastavenia</h2>
 
                 <p class="section-description">
                     Uprav typ funkcie, amplitúdu alebo frekvenciu a sleduj zmenu výstupu v reálnom čase.
@@ -105,36 +133,65 @@
 
         <div class="right-panel">
 
-            <section class="card formula-card">
-                <h2>4. Vygenerovaná matematická funkcia</h2>
+            <section class="card formula-card collapsible-card">
+                <div class="card-title-row">
+                    <h2>5. Vygenerovaná matematická funkcia</h2>
+                    <button class="collapse-btn" data-target="formulaContent">Skryť</button>
+                </div>
 
-                <p class="section-description">
-                    <strong>OUTPUT:</strong> Výstupom je matematický model vytvorený zo zvukového signálu.
-                </p>
+                <div id="formulaContent" class="collapsible-content">
+                    <p class="section-description">
+                        <strong>OUTPUT:</strong> Výstupom je matematický model vytvorený zo zvukového signálu.
+                    </p>
 
-                <div class="formula-box">
-                    <p id="formula">f(t) = A · sin(2π · f · t)</p>
+                    <div class="formula-box">
+                        <p id="formula">f(t) = A · sin(2π · f · t)</p>
+                    </div>
                 </div>
             </section>
 
             <section class="card graph-card">
-                <h2>5. Graf aproximovanej funkcie</h2>
+                <h2>6. Graf aproximovanej funkcie</h2>
 
                 <p class="section-description">
                     Graf obsahuje os X, os Y, číselné body a krivku vytvorenú podľa matematického modelu.
                 </p>
 
-                <canvas id="functionCanvas" width="900" height="260"></canvas>
+                <canvas id="functionCanvas" width="900" height="245"></canvas>
             </section>
 
-            <section class="card comparison-card">
-                <h2>6. Porovnanie všetkých 3 módov</h2>
+            <section class="card comparison-card collapsible-card">
+                <div class="card-title-row">
+                    <h2>7. Porovnanie všetkých 3 módov</h2>
+                    <button class="collapse-btn" data-target="comparisonContent">Skryť</button>
+                </div>
+
+                <div id="comparisonContent" class="collapsible-content">
+                    <p class="section-description">
+                        Porovnanie všetkých troch režimov: sínus, kosínus a kombinovaná funkcia.
+                    </p>
+
+                    <canvas id="waveCanvas" width="900" height="200"></canvas>
+                </div>
+            </section>
+
+            <section class="card transformations-card">
+                <h2>8. Transformácie funkcie</h2>
 
                 <p class="section-description">
-                    Porovnanie všetkých troch režimov: sínus, kosínus a kombinovaná funkcia.
+                    Ukážka rôznych transformácií vygenerovanej funkcie: posun, zmena amplitúdy,
+                    fázový posun a Fourierovská harmonická aproximácia.
                 </p>
 
-                <canvas id="waveCanvas" width="900" height="220"></canvas>
+                <div class="transform-controls">
+                    <button class="transform-btn active" data-transform="original">Pôvodná</button>
+                    <button class="transform-btn" data-transform="verticalShift">Vertikálny posun</button>
+                    <button class="transform-btn" data-transform="amplitudeScale">Zmena amplitúdy</button>
+                    <button class="transform-btn" data-transform="phaseShift">Fázový posun</button>
+                    <button class="transform-btn" data-transform="fourier">Fourier harmonics</button>
+                </div>
+
+                <canvas id="transformCanvas" width="900" height="205"></canvas>
             </section>
 
         </div>
@@ -143,7 +200,7 @@
 
     <footer>
         <p>
-            Projekt funguje bez externého backendu. Všetky výpočty, spracovanie audia a grafické výstupy prebiehajú priamo v prehliadači.
+            Projekt funguje bez externého backendu. Všetky výpočty, generovanie audia a grafické výstupy prebiehajú priamo v prehliadači.
         </p>
     </footer>
 

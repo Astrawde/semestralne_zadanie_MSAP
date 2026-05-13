@@ -138,6 +138,21 @@ button:disabled {
     transform: none;
 }
 
+.preset-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 7px;
+}
+
+.preset-btn {
+    background: #0f766e;
+    font-size: 12px;
+}
+
+.preset-btn:hover {
+    background: #115e59;
+}
+
 .stats-grid {
     display: grid;
     grid-template-columns: 1fr;
@@ -161,6 +176,23 @@ button:disabled {
 .stat-box strong {
     font-size: 17px;
     color: #111827;
+}
+
+.similarity-bar {
+    margin-top: 7px;
+    width: 100%;
+    height: 8px;
+    background: #d1d5db;
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+#similarityFill {
+    width: 0%;
+    height: 100%;
+    background: linear-gradient(90deg, #ef4444, #f59e0b, #22c55e);
+    border-radius: 999px;
+    transition: width 0.3s ease;
 }
 
 .formula-card {
@@ -247,7 +279,8 @@ button:disabled {
 }
 
 .graph-card canvas,
-.comparison-card canvas {
+.comparison-card canvas,
+.transformations-card canvas {
     width: 100%;
     border-radius: 10px;
     background: #111827;
@@ -255,12 +288,64 @@ button:disabled {
     display: block;
 }
 
-.graph-card {
+.graph-card,
+.comparison-card,
+.transformations-card {
     padding-bottom: 10px;
 }
 
-.comparison-card {
-    padding-bottom: 10px;
+.card-title-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+}
+
+.card-title-row h2 {
+    margin-bottom: 0;
+}
+
+.collapse-btn {
+    background: #334155;
+    font-size: 11px;
+    padding: 6px 10px;
+}
+
+.collapse-btn:hover {
+    background: #1e293b;
+}
+
+.collapsible-content {
+    margin-top: 8px;
+}
+
+.collapsible-content.collapsed {
+    display: none;
+}
+
+.transform-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin-bottom: 9px;
+}
+
+.transform-btn {
+    background: #334155;
+    font-size: 11px;
+    padding: 7px 10px;
+}
+
+.transform-btn:hover {
+    background: #1e293b;
+}
+
+.transform-btn.active {
+    background: #16a34a;
+}
+
+.transform-btn.active:hover {
+    background: #15803d;
 }
 
 footer {
